@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "advent-of-code"
+version = "0.1.0"
+description = ""
+authors = ["robertpikmets <robertpikmets@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+black = "^23.11.0"
+ruff = "^0.1.6"
+
+[tool.ruff]
+select = ["E", "F", "W", "I"]
+line-length = 100
+target-version = "py311"
+
+[tool.black]
+line-length = 100
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
