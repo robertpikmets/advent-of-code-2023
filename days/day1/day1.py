@@ -44,4 +44,3 @@ for line in input:
     except KeyError:
         pass
     part2_answer += int(first_digit + last_digit)
-print("hello")
