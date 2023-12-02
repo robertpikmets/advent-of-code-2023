@@ -1,4 +1,5 @@
 import math
+import time
 
 with open("days/day2/data.txt") as file:
     games = [line.rstrip() for line in file]
@@ -9,28 +10,29 @@ LIMITS = {
     "blue": 14,
 }
 
+time_start = time.perf_counter()
+
 # PART 1
 answer = 0
-for game in games:
+for i, game in enumerate(games):
     possible = True
     sets = game.split(": ")[1].split("; ")
-    # avoiding re.finditer to make it more fun
-    for colour in LIMITS.keys():
-        for game_set in sets:
-            i = game_set.find(colour)
-            if i != -1:
-                # thank god there aren't 3 digit numbers (i.e. >= 100)
-                cube_count = game_set[: i - 1][-2:]
-                if int(cube_count) > LIMITS[colour]:
-                    possible = False
-                    break
+    # avoiding regex to keep the fun
+    for game_set in sets:
+        for draw in game_set.split(", "):
+            n, colour = draw.split()
+            if int(n) > LIMITS[colour]:
+                possible = False
+                break
         if not possible:
             break
     if possible:
-        answer += int(game.split(": ")[0].split(" ")[1])
+        answer += i + 1
+print(f'Solved in {time.perf_counter()-time_start:.5f} Sec.')  # Solved in 0.01122 Sec.
 print(answer)
 
 # PART 2
+time_start = time.perf_counter()
 answer = 0
 for game in games:
     max_cubes = {"red": 0, "green": 0, "blue": 0}
@@ -38,10 +40,11 @@ for game in games:
     # avoiding re.finditer to make it more fun
     for colour in max_cubes.keys():
         for game_set in sets:
-            i = game_set.find(colour)
+            i = game_set.find(colour)  # change
             if i != -1:
                 cube_count = int(game_set[: i - 1][-2:])
                 if cube_count > max_cubes[colour]:
                     max_cubes[colour] = cube_count
     answer += math.prod(max_cubes.values())
+print(f'Solved in {time.perf_counter()-time_start:.5f} Sec.')  # Solved in 0.02257 Sec.
 print(answer)
