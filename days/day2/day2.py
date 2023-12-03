@@ -37,14 +37,13 @@ answer = 0
 for game in games:
     max_cubes = {"red": 0, "green": 0, "blue": 0}
     sets = game.split(": ")[1].split("; ")
-    # avoiding re.finditer to make it more fun
+    # avoiding regex to keep the fun
     for colour in max_cubes.keys():
         for game_set in sets:
-            i = game_set.find(colour)  # change
-            if i != -1:
-                cube_count = int(game_set[: i - 1][-2:])
-                if cube_count > max_cubes[colour]:
-                    max_cubes[colour] = cube_count
+            for draw in game_set.split(", "):
+                n, colour = draw.split()
+                if int(n) > max_cubes[colour]:
+                    max_cubes[colour] = int(n)
     answer += math.prod(max_cubes.values())
-print(f'Solved in {time.perf_counter()-time_start:.5f} Sec.')  # Solved in 0.02257 Sec.
+print(f'Solved in {time.perf_counter()-time_start:.5f} Sec.')  # Solved in 0.05261 Sec.
 print(answer)
