@@ -28,7 +28,7 @@ for i, game in enumerate(games):
             break
     if possible:
         answer += i + 1
-print(f'Solved in {time.perf_counter()-time_start:.5f} Sec.')  # Solved in 0.01122 Sec.
+print(f"Solved in {time.perf_counter()-time_start:.5f} Sec.")  # Solved in 0.01122 Sec.
 print(answer)
 
 # PART 2
@@ -45,5 +45,5 @@ for game in games:
                 if int(n) > max_cubes[colour]:
                     max_cubes[colour] = int(n)
     answer += math.prod(max_cubes.values())
-print(f'Solved in {time.perf_counter()-time_start:.5f} Sec.')  # Solved in 0.05261 Sec.
+print(f"Solved in {time.perf_counter()-time_start:.5f} Sec.")  # Solved in 0.05261 Sec.
 print(answer)
